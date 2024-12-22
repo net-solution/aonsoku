@@ -52,7 +52,6 @@ async function getOne(id: string) {
   })
 
   const album = response?.data.album
-  console.log(album)
 
   if (!album) {
     throw new Error(`Album with ID ${id} not found`)
