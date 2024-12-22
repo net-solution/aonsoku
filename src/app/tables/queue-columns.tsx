@@ -57,17 +57,24 @@ export function queueColumns(): ColumnDefType<ISong>[] {
         const { setQueueDrawerState } = usePlayerStore.getState().actions
 
         return (
-          <Link
-            to={ROUTES.ARTIST.PAGE(row.original.artistId)}
-            className="hover:underline truncate"
-            onClick={() => setQueueDrawerState(false)}
-            onContextMenu={(e) => {
-              e.stopPropagation()
-              e.preventDefault()
-            }}
-          >
-            {row.original.artist}
-          </Link>
+          <span>
+            {row.original.artists.map((artist, index) => (
+              <span key={artist.id}>
+                <Link
+                  to={ROUTES.ARTIST.PAGE(artist.id)}
+                  className="hover:underline truncate"
+                  onClick={() => setQueueDrawerState(false)}
+                  onContextMenu={(e) => {
+                    e.stopPropagation()
+                    e.preventDefault()
+                  }}
+                >
+                  {artist.name}
+                </Link>
+                {index < row.original.artists.length - 1 && ', '}
+              </span>
+            ))}
+          </span>
         )
       },
     },

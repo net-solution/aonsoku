@@ -50,17 +50,26 @@ export function CurrentSongInfo() {
         </h4>
 
         <p className="leading-7 text-muted-foreground">
-          {currentSong.artistId ? (
-            <Link
-              to={ROUTES.ARTIST.PAGE(currentSong.artistId)}
-              className="hover:underline"
-              onClick={() => setQueueDrawerState(false)}
-            >
-              {currentSong.artist}
-            </Link>
-          ) : (
-            <>{currentSong.artist}</>
-          )}
+          {currentSong.artists.map((artist, index) => (
+            <>
+              {artist.id ? (
+                <>
+                  <Link
+                    to={ROUTES.ARTIST.PAGE(artist.id)}
+                    className="hover:underline"
+                    onClick={() => setQueueDrawerState(false)}
+                  >
+                    {artist.name}
+                  </Link>
+                  {index < currentSong.artists.length - 1 && (
+                    <span className="mx-1">•</span>
+                  )}
+                </>
+              ) : (
+                <>{artist.name}</>
+              )}
+            </>
+          ))}
         </p>
       </div>
     </div>
