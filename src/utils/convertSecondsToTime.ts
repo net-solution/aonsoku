@@ -22,9 +22,9 @@ export function convertSecondsToHumanRead(time: number) {
   const numberOfSeconds = dur.seconds()
 
   const days = t('time.days', { days: dur.format('DD'), count: numberOfDays })
-  const hours = t('time.hour', { hour: dur.format('HH') })
-  const minutes = t('time.minutes', { minutes: dur.format('mm') })
-  const seconds = t('time.seconds', { seconds: dur.format('ss') })
+  const hours = t('time.hour', { hour: numberOfHours })
+  const minutes = t('time.minutes', { minutes: numberOfMinutes })
+  const seconds = t('time.seconds', { seconds: numberOfSeconds })
 
   const finalText = []
 
