@@ -103,7 +103,7 @@ export default function Album() {
 
   const albumHasMoreThanOneDisc = album.discTitles
     ? album.discTitles.length > 1
-    : false
+    : album?.song[album.song.length - 1].discNumber > 1
 
   return (
     <div className="w-full">
