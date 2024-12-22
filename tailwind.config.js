@@ -18,7 +18,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ['Poppins', 'sans-serif'],
+        sans: ['Raveo', 'sans-serif'],
       },
       height: {
         content: 'var(--content-height)',
@@ -122,7 +122,7 @@ module.exports = {
   plugins: [
     require('tailwindcss-animate'),
     require('tailwind-extended-shadows'),
-    function ({ matchUtilities, theme }) {
+    function({ matchUtilities, theme }) {
       matchUtilities(
         {
           maskImage: (value) => {
