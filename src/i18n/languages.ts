@@ -4,6 +4,7 @@ import ptBr from './locales/pt-BR.json'
 import zhHans from './locales/zh-Hans.json'
 
 export const resources = {
+  'en-GB': { translation: en },
   'en-US': { translation: en },
   'es-ES': { translation: es },
   'pt-BR': { translation: ptBr },
@@ -11,6 +12,12 @@ export const resources = {
 }
 
 export const languages = [
+  {
+    nativeName: 'English (GB)',
+    langCode: 'en-GB',
+    flag: 'GB',
+    dayjsLocale: 'en',
+  },
   {
     nativeName: 'English (US)',
     langCode: 'en-US',
