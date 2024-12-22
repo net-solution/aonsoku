@@ -121,7 +121,7 @@ export default function ImageHeader({
           <p className="text-xs 2xl:text-sm font-medium drop-shadow">{type}</p>
           <h1
             className={clsx(
-              'scroll-m-20 font-bold tracking-tight antialiased drop-shadow-md line-clamp-2',
+              'scroll-m-20 font-extrabold tracking-tight antialiased drop-shadow-md line-clamp-2',
               getTextSizeClass(title),
             )}
           >
@@ -132,14 +132,6 @@ export default function ImageHeader({
             <>
               {artistId ? (
                 <div className="flex items-center mt-2">
-                  <div className="w-6 h-6 rounded-full bg-accent/50 drop-shadow">
-                    <LazyLoadImage
-                      effect="opacity"
-                      src={getCoverArtUrl(artistId, 'artist', '100')}
-                      alt={subtitle}
-                      className="w-full h-full rounded-full aspect-square object-cover"
-                    />
-                  </div>
                   <Link
                     className="flex items-center ml-2 hover:underline text-sm font-medium drop-shadow"
                     to={ROUTES.ARTIST.PAGE(artistId)}
