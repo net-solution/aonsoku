@@ -51,23 +51,26 @@ export function TrackInfo({ song }: { song: ISong | undefined }) {
             </span>
           </Link>
         </MarqueeTitle>
-        <Link
-          to={ROUTES.ARTIST.PAGE(song.artistId!)}
-          className={cn(
-            'w-fit inline-flex',
-            !song.artistId && 'pointer-events-none',
-          )}
-          data-testid="track-artist-url"
-        >
-          <span
-            className={cn(
-              'text-xs font-regular text-muted-foreground',
-              song.artistId && 'hover:underline',
-            )}
-          >
-            {song.artist}
-          </span>
-        </Link>
+
+        <span className="text-xs w-fit font-regular text-muted-foreground">
+          {song.artists.map((artist, index) => (
+            <span key={artist.id}>
+              <Link
+                to={ROUTES.ARTIST.PAGE(artist.id ?? '')}
+                className={cn(
+                  artist.id ? 'hover:underline' : 'pointer-events-none',
+                )}
+                onContextMenu={(e) => {
+                  e.stopPropagation()
+                  e.preventDefault()
+                }}
+              >
+                {artist.name}
+              </Link>
+              {index < song.artists.length - 1 && ', '}
+            </span>
+          ))}
+        </span>
       </div>
     </>
   ) : (

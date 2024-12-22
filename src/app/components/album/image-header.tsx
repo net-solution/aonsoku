@@ -19,7 +19,7 @@ interface ImageHeaderProps {
   type: string
   title: string
   subtitle?: string
-  artistId?: string
+  artists?: { name: string; id: string }[]
   coverArtId?: string
   coverArtType: CoverArt
   coverArtSize: string
@@ -32,7 +32,7 @@ export default function ImageHeader({
   type,
   title,
   subtitle,
-  artistId,
+  artists,
   coverArtId,
   coverArtType,
   coverArtSize,
@@ -128,16 +128,23 @@ export default function ImageHeader({
             {title}
           </h1>
 
-          {!isPlaylist && subtitle && (
+          {!isPlaylist && (artists || subtitle) && (
             <>
-              {artistId ? (
+              {artists && artists.length > 0 ? (
                 <div className="flex items-center mt-2">
-                  <Link
-                    className="flex items-center ml-2 hover:underline text-sm font-medium drop-shadow"
-                    to={ROUTES.ARTIST.PAGE(artistId)}
-                  >
-                    {subtitle}
-                  </Link>
+                  {artists.map((artist, index) => (
+                    <div key={artist.id} className="flex items-center">
+                      <Link
+                        className="flex items-center hover:underline text-sm font-bold drop-shadow"
+                        to={ROUTES.ARTIST.PAGE(artist.id)}
+                      >
+                        {artist.name}
+                      </Link>
+                      {index < artists.length - 1 && (
+                        <span className="mx-1">•</span>
+                      )}
+                    </div>
+                  ))}
                   <HeaderInfoGenerator badges={badges} />
                 </div>
               ) : (
@@ -155,7 +162,7 @@ export default function ImageHeader({
             </>
           )}
 
-          {!subtitle && (
+          {!subtitle && !artists && (
             <div className="mt-1">
               <HeaderInfoGenerator badges={badges} showFirstDot={false} />
             </div>

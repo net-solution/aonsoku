@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import { Play } from 'lucide-react'
+import React from 'react'
 import { isFirefox } from 'react-device-detect'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { Link } from 'react-router-dom'
@@ -82,22 +83,40 @@ export function HeaderItem({ song }: { song: ISong }) {
                 {song.title}
               </h1>
             </Link>
-            {!song.artistId ? (
+            {song.artists && song.artists.length ? (
+              <div
+                className="flex flex-wrap items-center"
+                data-testid="header-artist"
+              >
+                {song.artists.map((artist, index) => (
+                  <React.Fragment key={artist.id || artist.name}>
+                    {artist.id ? (
+                      <Link
+                        to={ROUTES.ARTIST.PAGE(artist.id)}
+                        className="w-fit hover:underline"
+                      >
+                        <h4 className="scroll-m-20 text-lg 2xl:text-xl font-semibold tracking-tight opacity-70">
+                          {artist.name}
+                        </h4>
+                      </Link>
+                    ) : (
+                      <h4 className="scroll-m-20 text-lg 2xl:text-xl font-semibold tracking-tight opacity-70">
+                        {artist.name}
+                      </h4>
+                    )}
+                    {index < song.artists.length - 1 && (
+                      <span className="mx-1 opacity-50">•</span>
+                    )}
+                  </React.Fragment>
+                ))}
+              </div>
+            ) : (
               <h4
                 data-testid="header-artist"
                 className="scroll-m-20 text-lg 2xl:text-xl font-semibold tracking-tight opacity-70"
               >
                 {song.artist}
               </h4>
-            ) : (
-              <Link to={ROUTES.ARTIST.PAGE(song.artistId)} className="w-fit">
-                <h4
-                  data-testid="header-artist"
-                  className="scroll-m-20 text-lg 2xl:text-xl font-semibold tracking-tight opacity-70 hover:underline"
-                >
-                  {song.artist}
-                </h4>
-              </Link>
             )}
             <div className="flex gap-2 mt-1 2xl:mt-2">
               {song.genre !== undefined && (

@@ -51,7 +51,17 @@ async function getOne(id: string) {
     },
   })
 
-  return response?.data.album
+  const album = response?.data.album
+  console.log(album)
+
+  if (!album) {
+    throw new Error(`Album with ID ${id} not found`)
+  }
+
+  return {
+    ...album,
+    artists: album?.artists ?? [{ id: album?.artistId, name: album?.artist }],
+  }
 }
 
 async function getInfo(id: string) {

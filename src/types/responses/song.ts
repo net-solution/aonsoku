@@ -23,6 +23,8 @@ export interface ISong {
   title: string
   album: string
   artist: string
+  artistId: string
+  artists: { name: string; id: string }[]
   track: number
   year: number
   genre?: string
@@ -37,7 +39,6 @@ export interface ISong {
   discNumber: number
   created: string
   albumId: string
-  artistId?: string
   type: string
   isVideo: boolean
   played?: string

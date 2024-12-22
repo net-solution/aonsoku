@@ -32,7 +32,7 @@ export default function Album() {
     isFetched,
   } = useGetAlbum(albumId)
   const { data: moreAlbums, isLoading: moreAlbumsIsLoading } =
-    useGetArtistAlbums(album?.artist || '')
+    useGetArtistAlbums(album?.artists[0].name || '')
   const { data: randomAlbums, isLoading: randomAlbumsIsLoading } =
     useGetGenreAlbums(album?.genre || '')
 
@@ -110,8 +110,7 @@ export default function Album() {
       <ImageHeader
         type={t('album.headline')}
         title={album.name}
-        subtitle={album.artist}
-        artistId={album.artistId}
+        artists={album.artists}
         coverArtId={album.coverArt}
         coverArtType="album"
         coverArtSize="700"
@@ -139,7 +138,10 @@ export default function Album() {
               showMore={true}
               title={t('album.more.listTitle')}
               moreTitle={t('album.more.discography')}
-              moreRoute={ROUTES.ALBUMS.ARTIST(album.artistId, album.artist)}
+              moreRoute={ROUTES.ALBUMS.ARTIST(
+                album.artists[0].id,
+                album.artists[0].name,
+              )}
             />
           )}
 

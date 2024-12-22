@@ -14,7 +14,7 @@ export interface OriginalReleaseDate {}
 export interface Albums {
   id: string
   name: string
-  artist: string
+  artists: { name: string; id: string }[]
   year?: number
   genre?: string
   coverArt: string
@@ -22,7 +22,6 @@ export interface Albums {
   playCount?: number
   created: string
   starred?: string
-  artistId: string
   songCount: number
 }
 
@@ -31,6 +30,7 @@ export interface SingleAlbum {
   name: string
   artist: string
   artistId: string
+  artists: { name: string; id: string }[]
   coverArt: string
   songCount: number
   duration: number

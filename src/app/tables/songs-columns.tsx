@@ -100,22 +100,29 @@ export function songsColumns(): ColumnDefType<ISong>[] {
         </DataTableColumnHeader>
       ),
       cell: ({ row }) => {
-        const { artist, artistId } = row.original
+        const { artists } = row.original
 
         return (
-          <Link
-            to={ROUTES.ARTIST.PAGE(artistId ?? '')}
-            className={clsx(
-              'truncate',
-              artistId ? 'hover:underline' : 'pointer-events-none',
-            )}
-            onContextMenu={(e) => {
-              e.stopPropagation()
-              e.preventDefault()
-            }}
-          >
-            {artist}
-          </Link>
+          <span>
+            {artists.map((artist, index) => (
+              <span key={artist.id}>
+                <Link
+                  to={ROUTES.ARTIST.PAGE(artist.id ?? '')}
+                  className={clsx(
+                    'truncate',
+                    artist.id ? 'hover:underline' : 'pointer-events-none',
+                  )}
+                  onContextMenu={(e) => {
+                    e.stopPropagation()
+                    e.preventDefault()
+                  }}
+                >
+                  {artist.name}
+                </Link>
+                {index < artists.length - 1 && ', '}
+              </span>
+            ))}
+          </span>
         )
       },
     },

@@ -128,11 +128,8 @@ export default function PreviewList({
                     <PreviewCard.Title link={ROUTES.ALBUM.PAGE(album.id)}>
                       {album.name}
                     </PreviewCard.Title>
-                    <PreviewCard.Subtitle
-                      enableLink={album.artistId !== undefined}
-                      link={ROUTES.ARTIST.PAGE(album.artistId)}
-                    >
-                      {album.artist}
+                    <PreviewCard.Subtitle getLink={ROUTES.ARTIST.PAGE}>
+                      {album.artists}
                     </PreviewCard.Subtitle>
                   </PreviewCard.InfoWrapper>
                 </PreviewCard.Root>

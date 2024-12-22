@@ -1,4 +1,5 @@
 import { Play } from 'lucide-react'
+import React from 'react'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { Link } from 'react-router-dom'
 import { Button } from '@/app/components/ui/button'
@@ -96,46 +97,48 @@ function Title({ link, children }: TitleProps) {
 }
 
 interface SubtitleProps {
-  link: string
-  children: string
-  enableLink?: boolean
+  children: { id?: string; name: string }[]
+  getLink?: (id: string) => string
   className?: string
 }
 
-function Subtitle({
-  link,
-  children,
-  enableLink = true,
-  className,
-}: SubtitleProps) {
-  if (!enableLink) {
+function Subtitle({ children, getLink, className }: SubtitleProps) {
+  if (Array.isArray(children)) {
     return (
-      <div className="w-full">
-        <p
-          className={cn(
-            'leading-5 truncate text-xs text-muted-foreground -mt-1',
-            className,
-          )}
-          data-testid="card-subtitle"
-        >
-          {children}
-        </p>
+      <div
+        className={cn(
+          'flex w-full truncate -mt-1 text-xs text-muted-foreground',
+          className,
+        )}
+        data-testid="card-subtitle"
+      >
+        {children.map((item, index) => (
+          <React.Fragment key={item.id || item.name}>
+            {item.id && getLink ? (
+              <Link to={getLink(item.id)} className="hover:underline truncate">
+                {item.name}
+              </Link>
+            ) : (
+              <span className="truncate">{item.name}</span>
+            )}
+            {index < children.length - 1 && (
+              <span className="mx-1 opacity-50">•</span>
+            )}
+          </React.Fragment>
+        ))}
       </div>
     )
   }
 
   return (
-    <div className="flex w-full truncate -mt-1" data-testid="card-subtitle">
-      <Link
-        to={link}
-        data-testid="card-subtitle-link"
-        className={cn(
-          'max-w-full truncate text-xs text-muted-foreground hover:underline',
-          className,
-        )}
-      >
-        {children}
-      </Link>
+    <div
+      className={cn(
+        'flex w-full truncate -mt-1 text-xs text-muted-foreground',
+        className,
+      )}
+      data-testid="card-subtitle"
+    >
+      {children}
     </div>
   )
 }
