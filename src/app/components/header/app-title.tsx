@@ -14,7 +14,7 @@ export function AppTitle() {
         {...tauriDragRegion}
         className="leading-7 text-sm font-medium text-muted-foreground"
       >
-        Aonsoku
+        Aonsoku-refix
       </span>
     </div>
   )
