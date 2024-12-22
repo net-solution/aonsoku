@@ -9,7 +9,7 @@ interface Children {
   children: React.ReactNode
 }
 
-interface RootProps extends Children {}
+interface RootProps extends Children { }
 
 function Root({ children }: RootProps) {
   return <div className="cursor-pointer">{children}</div>
@@ -71,7 +71,7 @@ function PlayButton({ onClick }: PlayButtonProps) {
   )
 }
 
-interface InfoWrapperProps extends Children {}
+interface InfoWrapperProps extends Children { }
 
 function InfoWrapper({ children }: InfoWrapperProps) {
   return <div className="flex flex-col cursor-default">{children}</div>
@@ -115,11 +115,17 @@ function Subtitle({ children, getLink, className }: SubtitleProps) {
         {children.map((item, index) => (
           <React.Fragment key={item.id || item.name}>
             {item.id && getLink ? (
-              <Link to={getLink(item.id)} className="hover:underline truncate">
+              <Link
+                to={getLink(item.id)}
+                className="hover:underline truncate"
+                title={item.name}
+              >
                 {item.name}
               </Link>
             ) : (
-              <span className="truncate">{item.name}</span>
+              <span className="truncate" title={item.name}>
+                {item.name}
+              </span>
             )}
             {index < children.length - 1 && (
               <span className="mx-1 opacity-50">•</span>
