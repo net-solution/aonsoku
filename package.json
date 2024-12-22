@@ -14,7 +14,7 @@
     "test": "cypress run --component"
   },
   "repository": {
-    "url": "https://github.com/victoralvesf/aonsoku"
+    "url": "https://github.com/net-solution/aonsoku"
   },
   "dependencies": {
     "@chriscodesthings/random-css-hex-color": "^1.1.0",
