@@ -14,6 +14,8 @@ export interface OriginalReleaseDate {}
 export interface Albums {
   id: string
   name: string
+  artist: string
+  artistId: string
   artists: { name: string; id: string }[]
   year?: number
   genre?: string

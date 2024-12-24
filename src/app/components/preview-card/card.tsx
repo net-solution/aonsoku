@@ -9,7 +9,7 @@ interface Children {
   children: React.ReactNode
 }
 
-interface RootProps extends Children { }
+interface RootProps extends Children {}
 
 function Root({ children }: RootProps) {
   return <div className="cursor-pointer">{children}</div>
@@ -71,7 +71,7 @@ function PlayButton({ onClick }: PlayButtonProps) {
   )
 }
 
-interface InfoWrapperProps extends Children { }
+interface InfoWrapperProps extends Children {}
 
 function InfoWrapper({ children }: InfoWrapperProps) {
   return <div className="flex flex-col cursor-default">{children}</div>
@@ -97,7 +97,8 @@ function Title({ link, children }: TitleProps) {
 }
 
 interface SubtitleProps {
-  children: { id?: string; name: string }[]
+  children: string | { id?: string; name: string }[]
+  link?: string
   getLink?: (id: string) => string
   className?: string
 }
